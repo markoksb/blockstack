@@ -1,7 +1,6 @@
 import pygame
 from position import Position
 from color import Color
-from surface import Surface
 
 class Tile:
     def __init__(self, position: Position, color: Color, size: int = 1, falling: bool = True) -> None:
@@ -25,7 +24,7 @@ class Tile:
     def color(self) -> Color:
         return self.__color
 
-    def render(self, surface: Surface) -> None:
+    def render(self, surface) -> None:
         size = surface.window.get_height() // surface.board.height
         board_offset = surface.width // 2 - ( surface.board.width * surface.board.tile_size) // 2
         rect = pygame.Rect(board_offset + self.position.x * size, self.position.y * size, size, size)
