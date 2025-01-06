@@ -18,7 +18,6 @@ class Tile:
     def change_pos(self, x_offset: int, y_offset: int) -> None:
         self.__position.x += x_offset
         self.__position.y += y_offset
-        #aprint(self.__position)
     
     @property
     def color(self) -> Color:
