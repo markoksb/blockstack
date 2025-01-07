@@ -73,10 +73,11 @@ class App:
         # fill the background
         self.window.fill((16,16,16))
 
-        # do other rendering
+        # render game objects
         for item in self.game_objects:
             item.render()
 
+        # render ui
         if self.menu.is_active():
             self.menu.draw(self.__display_surface)
 
@@ -86,11 +87,12 @@ class App:
     def cleanup(self) -> None:
         pygame.quit()
 
-    def run(self) -> None:        
+    def run(self) -> None:
+        """ initialization and loop """
         self.on_init()
 
         while self.running:
-            dt = self.__clock.tick()
+            dt = self.__clock.tick(120)
             for event in pygame.event.get():
                 self.on_event(event)
             self.update(dt)
@@ -98,10 +100,20 @@ class App:
         self.cleanup()
 
     def quit(self) -> None:
+        """ exiting gameloop """
         self.__running = False
     
     def reset(self) -> None:
+        """ start new game """
         self.__board = Board(self)
+
+    def register_game_object(self, obj) -> None:
+        """ register object to renderqueue """
+        self.__game_objects.append(obj)
+
+    @property
+    def game_objects(self) -> list:
+        return self.__game_objects    
 
     @property
     def board(self) -> Board:
@@ -109,14 +121,7 @@ class App:
     
     @property
     def menu(self) -> Menu:
-        return self.__menu
-    
-    @property
-    def game_objects(self) -> list:
-        return self.__game_objects
-    
-    def register_game_object(self, obj) -> None:
-        self.__game_objects.append(obj)
+        return self.__menu    
 
     @property
     def window(self) -> pygame.Surface:
