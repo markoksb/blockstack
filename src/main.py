@@ -3,7 +3,7 @@ from board import Board
 from ui.menu import Menu
 
 class App:
-    def __init__(self, name: str, width: int = 720, height: int = 1080): #640 x 360
+    def __init__(self, name: str, width: int = 720, height: int = 720): #640 x 360
         self.__running: bool = False
         self.__display_surface = None
         self.__name: str = name
@@ -55,6 +55,16 @@ class App:
                     if button.get_rect().left + self.menu.get_x() < pos[0] and button.get_rect().right + self.menu.get_x() > pos[0] and\
                         button.get_rect().top + self.menu.get_y() < pos[1] and button.get_rect().bottom + self.menu.get_y() > pos[1]:
                         button.activate()
+
+        if event.type == pygame.MOUSEMOTION:
+            if self.menu.is_active():
+                pos = pygame.mouse.get_pos()
+                for button in self.menu.get_buttons():
+                    if button.get_rect().left + self.menu.get_x() < pos[0] and button.get_rect().right + self.menu.get_x() > pos[0] and\
+                        button.get_rect().top + self.menu.get_y() < pos[1] and button.get_rect().bottom + self.menu.get_y() > pos[1]:
+                        button.on_mouse_over()
+                    else:
+                        button.on_mouse_exit()
 
     def update(self, dt: int) -> None:
         if self.board.game_over():

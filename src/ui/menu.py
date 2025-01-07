@@ -6,6 +6,7 @@ SPACE_TOP = 50
 BUTTON_WIDTH = 150
 BUTTON_HEIGHT = 30
 BUTTON_COLOR = (47, 47, 47, 255)
+BUTTON_HOVER_COLOR = (47, 47, 127, 255)
 BUTTON_TEXT_COLOR = (255, 255, 255, 255)
 
 class Menu:
@@ -18,8 +19,8 @@ class Menu:
         self.__surface = pygame.Surface((self.__width, self.__height), pygame.SRCALPHA, 32)
         #self.__surface.fill( (0,0,0,0) )
         self.__buttons: list = []
-        self.__buttons.append(Button(self.__width // 2 - BUTTON_WIDTH // 2, SPACE_TOP, BUTTON_WIDTH, BUTTON_HEIGHT, "Play", BUTTON_COLOR, BUTTON_TEXT_COLOR, self.start_game))
-        self.__buttons.append(Button(self.__width // 2 - BUTTON_WIDTH // 2, SPACE_TOP + BUTTON_HEIGHT + SPACE, BUTTON_WIDTH, BUTTON_HEIGHT, "Quit", BUTTON_COLOR, (191, 0, 0), self.__parent.quit))
+        self.__buttons.append(Button(self.__width // 2 - BUTTON_WIDTH // 2, SPACE_TOP, BUTTON_WIDTH, BUTTON_HEIGHT, "Play", BUTTON_COLOR, BUTTON_HOVER_COLOR, BUTTON_TEXT_COLOR, self.start_game))
+        self.__buttons.append(Button(self.__width // 2 - BUTTON_WIDTH // 2, SPACE_TOP + BUTTON_HEIGHT + SPACE, BUTTON_WIDTH, BUTTON_HEIGHT, "Quit", BUTTON_COLOR, BUTTON_HOVER_COLOR, (191, 0, 0), self.__parent.quit))
 
     def get_surface(self):
         return self.__surface
