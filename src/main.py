@@ -3,7 +3,7 @@ from board import Board
 from ui.menu import Menu
 
 class App:
-    def __init__(self, name: str, width: int = 720, height: int = 720): #640 x 360
+    def __init__(self, name: str, width: int = 720, height: int = 1080): #640 x 360
         self.__running: bool = False
         self.__display_surface = None
         self.__name: str = name
@@ -22,7 +22,7 @@ class App:
         self.__caption = pygame.display.set_caption(self.__name)
         self.__clock = pygame.time.Clock()
         self.__board = Board(self)
-        self.__menu = Menu(self)
+        self.__menu = Menu(self, self.__name)
         self.running = True
 
     def on_keypress(self, key):
